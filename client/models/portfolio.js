@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('newstock')
-.factory('Portfolio', function($rootScope, $firebaseArray, $window){
+.factory('Portfolio', function($rootScope, $firebaseArray,$firebaseObject,$window){
 
   function Portfolio(){
   }
@@ -26,5 +26,14 @@ angular.module('newstock')
     return $rootScope.afUser.$save();
   };
 
+  Portfolio.removeStock = function(stock, portfolio, idx, key){
+    var fbPortfolio = $rootScope.fbUser.child('portfolios/' + portfolio);
+    var fbStock = fbPortfolio.child(key);
+    var afStock = $firebaseObject(fbStock);
+    //console.log($rootScope.afUser.portfolios[portfolio][key]);
+    afStock.$loaded().then(function(){
+      afStock.$remove();
+    });
+  };
   return Portfolio;
 });

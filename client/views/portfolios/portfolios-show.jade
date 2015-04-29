@@ -13,8 +13,6 @@
         input.form-control#quantity(type='quantity', ng-model='stock.quantity')
       .form-group
         button.btn.btn-success.form-control(type='submit' ng-click='purchase(stock)') Buy Stock
-      .form-group
-        button.btn.btn-info.form-control(ng-click='sell(stock)') Sell Stock
   .col-xs-8
     h3 Stocks
     table.table.table-striped
@@ -25,6 +23,7 @@
           th Price
           th Position
           th Date Purchased
+          th Sell
       tbody
         tr(ng-repeat='stock in stocks')
           td {{stock.symbol}}
@@ -32,3 +31,4 @@
           td {{stock.price | currency}}
           td {{stock.position | currency}}
           td {{stock.purchasedOn | date:'MM-dd-yyyy'}}
+          td: button.btn.btn-danger.form-control.btn-xs(ng-click='sell(stock, $index)') Sell Stock

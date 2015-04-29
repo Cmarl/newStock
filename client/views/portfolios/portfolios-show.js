@@ -17,6 +17,16 @@ angular.module('newstock')
     });
   };
 
+  $scope.sell = function(stock,idx){
+    var key = stock.$id;
+    var quote = new Stock(stock);
+    quote.getQuote()
+    .then(function(response){
+      stock.quote = response.data.LastPrice;
+      Portfolio.removeStock(stock, $state.params.name, idx, key).then(clearFields);
+    });
+  };
+
   function clearFields(){
     $scope.stock = null;
   }

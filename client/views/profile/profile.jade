@@ -5,37 +5,37 @@ h1 Profile
     form
       .form-group
         label(for='photo') Photo URL
-        input.form-control#photo(type='text', ng-model='user.photo')
+        input.form-control#photo(type='text', ng-model='profile.photo')
       .form-group
         label(for='name') Name
-        input.form-control#name(type='text', ng-model='user.name')
+        input.form-control#name(type='text', ng-model='profile.name')
       .form-group
         label(for='age') Age
-        input.form-control#age(type='number', ng-model='user.age')
+        input.form-control#age(type='number', ng-model='profile.age')
       .form-group
         label(for='gender') Gender
-        select.form-control#gender(ng-model='user.gender')
+        select.form-control#gender(ng-model='profile.gender')
           option Male
           option Female
       .form-group
         label(for='address') Address
-        textarea.form-control#address(rows='3', ng-model='user.address')
+        textarea.form-control#address(rows='3', ng-model='profile.address')
       .form-group
-        button.btn.btn-info.btn-xs.form-control(ng-click='saveInfo(user)') Save
+        button.btn.btn-info.btn-xs.form-control(ng-click='save(profile)') Save
   .col-xs-6#profileArea
-    img.img-responsive(ng-src='{{user.photo}}')
-    h1 {{user.name}}
-    h2 Age: {{user.age}}
-    h3 Gender: {{user.gender}}
-    h3 Address: {{user.address}}
+    img.img-responsive(ng-src='{{profile.photo}}')
+    h1 {{profile.name}}
+    h2 Age: {{profile.age}}
+    h3 Gender: {{profile.gender}}
+    h3 {{profile.address}}
 h2 Transactions
 .row
   .col-xs-6
     form#account
       .form-group
         label(for='amount') Amount
-        input.form-control#amount(type='number', ng-model='tx.amount')
+        input.form-control#amount(type='number', ng-model='amount')
       .form-group
-        button.btn.btn-danger.form-control(ng-click='deposit(tx.amount)') Deposit
+        button.btn.btn-danger.form-control(ng-click='deposit(amount)') Deposit
   .col-xs-6#accountArea
-    h2(ng-model='account.balance') Balance: {{account.balance | currency}}
+    h2 Balance: {{balance | currency}}

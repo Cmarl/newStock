@@ -2,19 +2,22 @@
 
 angular.module('newstock')
 .controller('ProfileCtrl', function($scope, Profile){
-  $scope.afProfile = $scope.user = Profile.init();
-  $scope.afAccount = $scope.account = Profile.balInit();
-
-  $scope.saveInfo = function(user){
-    Profile.saveInfo(user);
-  };
-
-  $scope.syncInfo = function(){
-    $scope.afProfile = $scope.user = Profile.init();
-  };
+  $scope.afUser.$loaded(createScope);
+  $scope.afUser.$watch(createScope);
 
   $scope.deposit = function(amount){
-    Profile.deposit(amount);
+    Profile.deposit(amount)
+    .then(function(){
+      $scope.amount = 0;
+    });
   };
 
+  $scope.save = function(profile){
+    Profile.save(profile);
+  };
+
+  function createScope(){
+    $scope.profile = $scope.afUser.profile;
+    $scope.balance = $scope.afUser.balance;
+  }
 });
