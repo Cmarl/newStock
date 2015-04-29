@@ -1,0 +1,8 @@
+h2 Portfolios List
+table.table
+  thead
+    tr
+      th Portfolio Names
+  tbody
+    tr(ng-repeat='name in names')
+      td: a(ui-sref='portfolios.show({name:name})') {{name}}

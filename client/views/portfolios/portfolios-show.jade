@@ -1,0 +1,18 @@
+.container-fluid
+  .row
+    .col-xs-6
+      h2 Portfolio Action
+      h3: em {{name}}
+      h3 Available: {{balance | currency}}
+  .row
+    .col-xs-6
+      form.form
+        .form-group
+          label(for='symbol') Symbol
+          input.form-control#symbol(type='text', ng-model='tx.symbol')
+          label(for='amount') Amount
+          input.form-control#amount(type='number', ng-model='tx.amount')
+        .form-group
+          button.btn.btn-success.form-control(ng-click='transaction(tx,"buy")') Buy
+        .form-group
+          button.btn.btn-info.form-control(ng-click='transaction(tx,"sell")') Sell

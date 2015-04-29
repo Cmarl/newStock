@@ -1,0 +1,41 @@
+h1 Profile
+
+.row
+  .col-xs-6#profile
+    form
+      .form-group
+        label(for='photo') Photo URL
+        input.form-control#photo(type='text', ng-model='user.photo')
+      .form-group
+        label(for='name') Name
+        input.form-control#name(type='text', ng-model='user.name')
+      .form-group
+        label(for='age') Age
+        input.form-control#age(type='number', ng-model='user.age')
+      .form-group
+        label(for='gender') Gender
+        select.form-control#gender(ng-model='user.gender')
+          option Male
+          option Female
+      .form-group
+        label(for='address') Address
+        textarea.form-control#address(rows='3', ng-model='user.address')
+      .form-group
+        button.btn.btn-info.btn-xs.form-control(ng-click='saveInfo(user)') Save
+  .col-xs-6#profileArea
+    img.img-responsive(ng-src='{{user.photo}}')
+    h1 {{user.name}}
+    h2 Age: {{user.age}}
+    h3 Gender: {{user.gender}}
+    h3 Address: {{user.address}}
+h2 Transactions
+.row
+  .col-xs-6
+    form#account
+      .form-group
+        label(for='amount') Amount
+        input.form-control#amount(type='number', ng-model='tx.amount')
+      .form-group
+        button.btn.btn-danger.form-control(ng-click='deposit(tx.amount)') Deposit
+  .col-xs-6#accountArea
+    h2(ng-model='account.balance') Balance: {{account.balance | currency}}
