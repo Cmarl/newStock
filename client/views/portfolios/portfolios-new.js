@@ -5,7 +5,6 @@ angular.module('newstock')
   $scope.add = function(name){
     Portfolio.add(name)
     .then(function(){
-      $scope.name = name;
       $state.go('portfolios.list', name);
     });
   };

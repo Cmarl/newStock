@@ -1,26 +1,29 @@
 'use strict';
 
 angular.module('newstock')
-.controller('PortfoliosShowCtrl', function($scope, $state, $rootScope){
+.controller('PortfoliosShowCtrl', function($scope, $state, Portfolio, Stock){
   $scope.name = $state.params.name;
-  $scope.balance = $rootScope.afUser.account.balance;
+  $scope.stocks = Portfolio.getStocks($state.params.name);
+  $scope.stocks.$watch(computePosition);
 
-
-  $scope.transaction = function(tx, type){
-    var url = 'http://dev.markitondemand.com/Api/v2/Quote/jsonp?symbol=' + tx.symbol + '&callback=?';
-    $.getJSON(url, function(response){
-      $scope.price = response.LastPrice;
-      $scope.total = $scope.price * tx.amount;
-      if (type === 'buy' && ($scope.balance - $scope.total) >= 0){
-        $scope.balance -= $scope.total;
-      } else if (type === 'sell') {
-        $scope.balance += $scope.total;
+  $scope.purchase = function(s){
+    var stock = new Stock(s);
+    stock.getQuote()
+    .then(function(response){
+      stock.quote = response.data.LastPrice;
+      if(stock.purchase()){
+        Portfolio.addStock(stock, $state.params.name).then(clearFields);
       }
-      //$rootScope.afUser.$save();
-      addToPortfolio(tx,type);
     });
   };
 
+  function clearFields(){
+    $scope.stock = null;
+  }
 
-
+  function computePosition(){
+    $scope.position = $scope.stocks.reduce(function(acc, stock){
+      return acc + stock.position;
+    }, 0);
+  }
 });

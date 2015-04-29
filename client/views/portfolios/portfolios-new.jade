@@ -3,7 +3,7 @@ h2 Create New Portfolio
   .col-xs-6
     form
       .form-group
-        label(for='newPortfolio') Name
-        input.form-control#newPortfolio(type='text', ng-model='name')
+        label(for='name') Name
+        input.form-control#newPortfolio(type='text', name='name', ng-model='name')
       .form-group
-        button.btn.btn-info.btn-xs.form-control(ng-click='add(name)') Create
+        button.btn.btn-info.btn-xs.form-control(type='submit', ng-click='add(name)') Create Portfolio
